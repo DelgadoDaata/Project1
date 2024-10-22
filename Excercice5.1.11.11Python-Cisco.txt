@@ -1,0 +1,119 @@
+************ 5.1.11.11  ***************
+from copy import deepcopy
+#Sudoku
+board = [[[],[],[]],[[],[],[]],[[],[],[]]]
+a=input("Ingresa los numeros:")
+validador=['1', '2', '3', '4', '5', '6', '7', '8', '9']
+contador= 0
+indice1=0
+indice2=0
+for i in a:
+    contador+=1
+    board[indice1][indice2].append(i)
+    while True:
+        if contador == 9:
+            indice2+=1
+            contador = 0
+        if indice2 == 3:
+            indice2=0
+            indice1+=1
+        if indice1 == 3:
+            break
+        else:
+            break
+def validar_fila(a):
+    saver = deepcopy(a)
+    contador=0
+    indice1=0
+    indice2=0
+    for i in range(0,9):
+        contador+=1
+        saver[indice1][indice2].sort()
+        if validador !=  saver[indice1][indice2]:
+            print("el juego está errado")
+            break
+        while True:
+            if contador<4:
+                indice2+=1
+                contador = 0
+            if indice2 == 3:
+                indice2=0
+                indice1+=1
+            if indice1 == 3:
+                break
+            else:
+                break
+    return print("filas correctas")             
+def validador_de_columnas(a):
+    saver = deepcopy(a)
+    indice1=0
+    indice2=0
+    indice3=0
+    columnas=[]
+    freno= True      
+    while freno:
+        columnas.append(saver[indice1][indice2][indice3])
+        indice2+= 1
+        if indice2 ==3:
+            indice2=0
+            indice1+=1
+        if indice1 == 3:
+            indice1=2
+            columnas.sort()
+            if validador != columnas:
+                print("columas erradas")
+                freno=False
+            else:
+                columnas=[]
+                indice3+=1
+                indice1=0
+                indice2=0
+        if indice3 == 9:
+            print("columnas correctas")
+            break
+def validar_cuadrado_interno(a):
+    saver = deepcopy(a)
+    acon=3
+    bcon=0
+    ccon=2
+    indice1=0
+    indice2=0
+    indice3=0
+    cuadrado_interno=[]
+    freno= True      
+    while freno:
+        cuadrado_interno.append(saver[indice1][indice2][indice3])
+        indice3+= 1
+        if indice3==acon:#3
+            indice3=bcon#0
+            indice2+=1
+        if indice2 == 3:
+            indice2=2
+            indice3=ccon#2
+            cuadrado_interno.sort()
+            if validador != cuadrado_interno:
+                print("cuadrado interno errado")
+                freno= False
+            else:
+                cuadrado_interno=[]
+                indice2=0
+                indice3+=1
+                acon+=3
+                bcon+=3
+                ccon+=3
+        if indice3 == 9:
+            indice1+=1
+            indice3=0
+            indice2=0
+            acon=3
+            bcon=0
+            ccon=2
+        if indice1==3:
+            print("cuadrado interno correcto")
+            freno= False
+
+
+validar_fila(board)
+validador_de_columnas(board)
+validar_cuadrado_interno(board)
+#print(board)
